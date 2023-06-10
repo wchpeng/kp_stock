@@ -2,16 +2,16 @@ import store from '@/store/index'
 import axios from 'axios'
 
 
-const instance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 3000,
-  headers: {'X-Custom-Header': 'foobar'}
-});
+// const instance = axios.create({
+//   baseURL: process.env.VUE_APP_BASE_API,
+//   timeout: 8000,
+//   headers: {'X-Custom-Header': 'foobar'}
+// });
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API
+axios.defaults.retry = 3;
+axios.defaults.retryDelay = 1000;
 
-instance.defaults.retry = 4;
-instance.defaults.retryDelay = 1000;
-
-instance.interceptors.request.use(function (config) {
+axios.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
   let token = store.state.token
   // if (!token) {
@@ -25,7 +25,7 @@ instance.interceptors.request.use(function (config) {
 });
 
 // 添加响应拦截器
-instance.interceptors.response.use(function (response) {
+axios.interceptors.response.use(function (response) {
   // 2xx 范围内的状态码都会触发该函数。
   // 对响应数据做点什么
   if(response.data.code == 400){
@@ -41,7 +41,7 @@ instance.interceptors.response.use(function (response) {
 
 
 async function request(method, url, params, data){
-  let response = await instance.request({
+  let response = await axios.request({
     url: url,
     method: method,
     params: params,
