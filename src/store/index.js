@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    nickname: '我是谁',
+    nickname: 'ADMIN',
     token: sessionStorage.getItem('token') ?sessionStorage.getItem('token') : ''
   },
   getters: {

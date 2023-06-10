@@ -7,6 +7,7 @@ import axios from 'axios'
 //   timeout: 8000,
 //   headers: {'X-Custom-Header': 'foobar'}
 // });
+// const controller = new AbortController();
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API
 axios.defaults.retry = 3;
 axios.defaults.retryDelay = 1000;
