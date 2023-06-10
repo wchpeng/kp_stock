@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 const instance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API + '/kp-stock-api',
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000,
   headers: {'X-Custom-Header': 'foobar'}
 });
