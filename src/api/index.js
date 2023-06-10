@@ -4,9 +4,12 @@ import axios from 'axios'
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000,
+  timeout: 3000,
   headers: {'X-Custom-Header': 'foobar'}
 });
+
+instance.defaults.retry = 4;
+instance.defaults.retryDelay = 1000;
 
 instance.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
