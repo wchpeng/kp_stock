@@ -11,9 +11,9 @@ const instance = axios.create({
 instance.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
   let token = store.state.token
-  if (!token) {
-    window.location = '/'
-  }
+  // if (!token) {
+  //   window.location = '/'
+  // }
   config['headers']['Authorization'] = token
   return config;
 }, function (error) {
@@ -27,7 +27,7 @@ instance.interceptors.response.use(function (response) {
   // 对响应数据做点什么
   if(response.data.code == 400){
     store.commit('setToken', '')
-    window.location = '/'
+    // window.location = '/'
   }
   return response;
 }, function (error) {

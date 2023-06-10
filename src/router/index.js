@@ -57,7 +57,7 @@ router.beforeEach((to,from,next) => {
       if(store.state.token){//通过vuex的state获取当前的token是否存在
           next()
       }else{
-          console.log('store.token: ', store.state.token)
+          // console.log('store.token: ', store.state.token)
           // next()
           next({
               // path:"/login",
