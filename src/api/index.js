@@ -76,10 +76,6 @@ export async function api_stock_price(params){
   return await request('get', '/stock-price/v1', params, {})
 }
 
-export async function api_selected_list(){
-  return await request('get', '/select-stock-list/v1', {}, {})
-}
-
 export async function api_selected_mod(add_ts_codes, del_ts_codes){
   return await request('post', '/modify-select-stock/v1', {}, {add_ts_codes: add_ts_codes, del_ts_codes: del_ts_codes})
 }

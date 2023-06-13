@@ -11,8 +11,8 @@
         </a>
         <template #list>
             <DropdownMenu>
-                <!-- <DropdownItem name="self">自选</DropdownItem> -->
-                <DropdownItem name="slist">列表</DropdownItem>
+              <DropdownItem name="slist">列表</DropdownItem>
+              <DropdownItem name="self">自选</DropdownItem>
             </DropdownMenu>
         </template>
       </Dropdown>

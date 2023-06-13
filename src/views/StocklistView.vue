@@ -36,6 +36,8 @@
               @on-cancel="delete_cancel">
                 <Button shape="circle" icon="ios-trash" size="small"></Button>
             </Poptip>
+            <Button style="margin-left: 5px;" shape="circle" icon="md-add" size="small" v-show="!row.is_selected" @click="click_add2self(row)"></Button>
+            <Button style="margin-left: 5px;" type="success" shape="circle" icon="md-checkmark" size="small" v-show="row.is_selected" @click="click_del2self(row)"></Button>
           </template>
         </Table>
         <Page  :total="total" :page-size="pageSize" v-model="pageNo" @on-change="changePageNo" style="padding:24px 0; text-align: center;" />
@@ -62,7 +64,7 @@
 import { Message } from 'view-ui-plus'
 import { useRouter } from 'vue-router'
 import { ref, reactive, onMounted, watch } from 'vue'
-import { api_stock_list,api_stock_add, api_stock_del} from '@/api/index'
+import { api_stock_list,api_stock_add, api_stock_del, api_selected_mod } from '@/api/index'
 
 const show_modal = ref(false)
 const modal_form = reactive({
@@ -95,7 +97,7 @@ async function delete_ok(ts_code){
 function delete_cancel(){}
 const formItem = reactive({
   k: '',
-  rule: '1'
+  rule: '0'
 })
 const ruleList = [
   {label: '------', value: '0'},
@@ -159,6 +161,18 @@ async function getStockList(){
 }
 async function changePageNo(){
   await getStockList()
+}
+async function click_add2self(row){
+  let response = await api_selected_mod([row.ts_code], [])
+  if(response.code == 0){
+    row.is_selected = true
+  }
+}
+async function click_del2self(row){
+  let response = await api_selected_mod([], [row.ts_code])
+  if(response.code == 0){
+    row.is_selected = false
+  }
 }
 onMounted(async () => {
   await getStockList()
