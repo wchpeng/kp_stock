@@ -148,7 +148,7 @@ async function getStockList(){
   if (response.code != 0){
     loading.value = false
     Message.warning(response.msg)
-    router.push({path: '/login'})
+    // router.push({path: '/login'})
   } else {
     data.splice(0, data.length)
     for (let i=0; i<response.data.list.length; i++){
